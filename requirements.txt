@@ -1,0 +1,8 @@
+pandas==2.2.0
+streamlit
+base64
+seaborn
+matplotlib
+matplotlib.pyplot
+altair
+pip==23.3.2
