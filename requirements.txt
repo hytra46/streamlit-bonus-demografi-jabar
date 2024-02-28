@@ -1,6 +1,6 @@
 pandas==2.2.0
 streamlit
-base64
+pybase64
 seaborn
 matplotlib
 matplotlib.pyplot
