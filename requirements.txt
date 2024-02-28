@@ -5,3 +5,4 @@ seaborn
 matplotlib
 altair
 pip==23.3.2
+openpyxl
