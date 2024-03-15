@@ -75,9 +75,60 @@ def main():
     Indeks Pembangunan Manusia (IPM) memiliki pengaruh yang signifikan terhadap bonus demografi. Pada tahun 2022, IPM Jawa Barat berada status ‘tinggi’ mencapai 73,12 dan menempati peringkat ke-10 secara nasional. Namun, ada risiko dan tantangan yang harus dihadapi untuk memanfaatkan bonus demografi. Berikut adalah beberapa risiko dan tantangan yang mungkin dihadapi:
     """)
 
+   # Misalkan kita memiliki DataFrame berikut:
+    tingkat_pendidikan = pd.read_excel("Streamlit Tingkat Pendidikan.xlsx")
+    # Membuat bar chart
+    highlight = alt.condition("datum.Pendidikan == 'Tidak Sekolah'", alt.value('orange'), alt.value('yellow'))
+    chart = alt.Chart(tingkat_pendidikan).mark_bar().encode(
+        x=alt.X('Pendidikan:N', sort='-y'),
+        y=alt.Y('Jumlah:Q', axis=alt.Axis(title='Jumlah'), scale=alt.Scale(domain=[0, 15000000], )),
+        color=highlight 
+    ).properties(
+        title='Tingkat Pendidikan di Jawa Barat pada Tahun 2021',
+        width=600,
+        height=400
+    )
+
+    # Menampilkan bar chart di Streamlit
+    st.altair_chart(chart, use_container_width=True)
     st.write("""
     1. **Pendidikan dan Keterampilan**: Jika pendidikan dan keterampilan penduduk usia produktif tidak memadai, hal ini dapat menghambat pemanfaatan bonus demografi.
+    """)
+    # Misalkan kita memiliki DataFrame berikut:
+    jaminan_kesehatan = pd.read_excel("Streamlit Jaminan Kesehatan.xlsx")
+
+    # Membuat donut chart
+    chart = alt.Chart(jaminan_kesehatan).mark_arc(innerRadius=95).encode(
+        theta='Persentase:Q',
+        color='Kategori:N',
+        tooltip=['Kategori', 'Persentase']
+    ).properties(
+        width=400,
+        height=400
+    )
+
+    # Menampilkan donut chart di Streamlit
+    st.altair_chart(chart, use_container_width=True)
+    st.write("""
     2. **Kesehatan**: Kesehatan penduduk usia produktif juga menjadi faktor penting. Jika kondisi kesehatan penduduk usia produktif buruk, hal ini dapat mengurangi produktivitas mereka.
+    """)
+    # Misalkan kita memiliki DataFrame berikut:
+    pengangguran_terbuka = pd.read_excel("Streamlit Pengangguran Terbuka.xlsx")
+
+     # Membuat line chart
+    chart = alt.Chart(pengangguran_terbuka).mark_line(point=True).encode(
+        x=alt.X('Tahun', axis=alt.Axis(title='Tahun')),
+        y=alt.Y('Jumlah', axis=alt.Axis(title='Populasi'), scale=alt.Scale(domain=[1000000, 3000000])),
+        tooltip=['Tahun', 'Jumlah']
+    ).properties(
+        title='Jumlah Pengangguran Terbuka (2012 - 2022)',
+        width=600,
+        height=400
+    ).interactive()
+
+    # Menampilkan line chart di Streamlit
+    st.altair_chart(chart, use_container_width=True)
+    st.write("""
     3. **Lapangan Pekerjaan**: Dengan meningkatnya jumlah penduduk usia produktif, kebutuhan akan lapangan pekerjaan juga akan meningkat. Jika lapangan pekerjaan tidak tersedia, hal ini dapat menyebabkan pengangguran dan kemiskinan.
     """)
 
